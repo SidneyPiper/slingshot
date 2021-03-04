@@ -25,8 +25,8 @@ void setup() {
   edges.add(new Edge(700, 300, 700, 500, r));
   edges.add(new Edge(700, 500, 900, 500, r));
   edges.add(new Edge(900, 300, 900, 500, r));
-  edges.add(new Edge(850, 300, 900, 300, r));
   edges.add(new Edge(700, 300, 750, 300, r));
+  edges.add(new Edge(1200, 100, 900, 300, r));
 }
 
 void draw() {

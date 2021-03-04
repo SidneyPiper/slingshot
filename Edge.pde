@@ -42,7 +42,9 @@ class Edge {
       PVector n = PVector.sub(b.vel, b.vel.copy().mult(-1));
       float p = PVector.dot(dx, n) / dx.magSq();
       b.vel = new PVector(b.vel.x - p * dx.x, b.vel.y - p * dx.y).mult(0.9);
-      println(b.vel.y);
+      if(abs(b.vel.x) * 2.5 <= abs(vs.x)) {
+        b.vel.add(vs);
+      }
     }
   }
 }
