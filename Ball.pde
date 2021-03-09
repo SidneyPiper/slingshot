@@ -43,7 +43,7 @@ class Ball {
     if (pos.x <= r || pos.x >= width - r) vel.x = -vel.x * 0.6;
     if (pos.y <= -height + r || pos.y >= height - r) vel.y = -vel.y * 0.6;
 
-    if ((vel.x * vel.x + vel.y * vel.y) < 0.001) vel.set(0, 0);
+    if (vel.magSq() < 0.01) vel.set(0, 0);
 
     if (!selected && !shot && moved) {
       if (pow(pos.x - SLING_POINT.x, 2) + pow(pos.y - SLING_POINT.y, 2) <= pow(20, 2)) shot = true;

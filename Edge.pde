@@ -16,12 +16,11 @@ class Edge {
     stroke(#5D432C);
     strokeWeight(r);
     line(s.x, s.y, e.x, e.y);
-    update();
   }
 
   void update() {
-    s.add(vs);
-    e.add(ve);
+    s.add(PVector.div(vs, res));
+    e.add(PVector.div(ve, res));
   }
 
   void checkCollision(Ball b) {
@@ -33,18 +32,17 @@ class Edge {
     float distance = dist(b.pos.x, b.pos.y, clo.x, clo.y);
 
     if (distance <= (b.r + r / 2)) {
+      b.vel.sub(vs);
+      
       float overlap = (distance - (b.r + r / 2));
       PVector normal = PVector.sub(b.pos, clo).normalize();
       b.pos.sub(new PVector(overlap * normal.x, overlap * normal.y));
 
-
       PVector dx = PVector.sub(b.pos, clo);
       PVector n = PVector.sub(b.vel, b.vel.copy().mult(-1));
       float p = PVector.dot(dx, n) / dx.magSq();
-      b.vel = new PVector(b.vel.x - p * dx.x, b.vel.y - p * dx.y).mult(0.9);
-      if(abs(b.vel.x) * 2.5 <= abs(vs.x)) {
-        b.vel.add(vs);
-      }
+      b.vel = new PVector(b.vel.x - p * dx.x, b.vel.y - p * dx.y).mult(0.8);
+      b.vel.add(vs);
     }
   }
 }

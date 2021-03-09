@@ -22,11 +22,9 @@ void setup() {
 
   b = new Ball(x, y, r);
   edges = new ArrayList<Edge>();
-  edges.add(new Edge(700, 300, 700, 500, r));
-  edges.add(new Edge(700, 500, 900, 500, r));
-  edges.add(new Edge(900, 300, 900, 500, r));
-  edges.add(new Edge(700, 300, 750, 300, r));
-  edges.add(new Edge(1200, 100, 900, 300, r));
+  edges.add(new Edge(700, 500, 775, 500, r));
+  edges.add(new Edge(700, 425, 700, 500, r));
+  edges.add(new Edge(775, 425, 775, 500, r));
 }
 
 void draw() {
@@ -49,6 +47,7 @@ void draw() {
   for (int i = 0; i <= res; i++) {
     for (Edge e : edges) {
       e.checkCollision(b);
+      e.update();
     }
     b.update();
   }
@@ -60,35 +59,34 @@ void draw() {
 
   if (right) {
     for (Edge e : edges) {
-      e.ve.set(5, 0);
-      e.vs.set(5, 0);
+      e.ve.set(2, 0);
+      e.vs.set(2, 0);
     }
   }
 
   if (left) {
     for (Edge e : edges) {
-      e.ve.set(-5, 0);
-      e.vs.set(-5, 0);
+      e.ve.set(-2, 0);
+      e.vs.set(-2, 0);
     }
   }
-  
+
   if (up) {
     for (Edge e : edges) {
-      e.ve.set(0, -5);
-      e.vs.set(0, -5);
+      e.ve.set(0, -2);
+      e.vs.set(0, -2);
     }
   }
-  
+
   if (down) {
     for (Edge e : edges) {
-      e.ve.set(0, 5);
-      e.vs.set(0, 5);
+      e.ve.set(0, 2);
+      e.vs.set(0, 2);
     }
   }
 
   if (!b.shot) {
     stroke(#8B0000);
-    //stroke(#BC915A);
     strokeWeight(map((pow(SLING_POINT.x - b.pos.x, 2) + pow(SLING_POINT.y - b.pos.y, 2)), 0, pow(120, 2), 7, 3));
     line(b.pos.x, b.pos.y, SLING_POINT.x - 30, SLING_POINT.y);
     line(b.pos.x, b.pos.y, SLING_POINT.x + 30, SLING_POINT.y);
